@@ -76,8 +76,8 @@ func (g *Group) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
 // data for each.
 func (g *Group) DecodeGroup(m *Map) error {
 	for i := 0; i < len(g.Groups); i++ {
-		g := g.Groups[i]
-		if err := g.DecodeGroup(m); err != nil {
+		curGroup := g.Groups[i]
+		if err := curGroup.DecodeGroup(m); err != nil {
 			return err
 		}
 	}

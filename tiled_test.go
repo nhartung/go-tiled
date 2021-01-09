@@ -160,7 +160,7 @@ func TestGroup(t *testing.T) {
 	assert.Equal(t, uint32(4), b.ID)
 	assert.Equal(t, "B", b.Name)
 	assert.Len(t, b.Layers, 1)
-	assert.Len(t, b.Groups, 1)
+	assert.Len(t, b.Groups, 2)
 
 	bL := b.Layers[0]
 	assert.Equal(t, uint32(3), bL.ID)
@@ -172,6 +172,27 @@ func TestGroup(t *testing.T) {
 	assert.Equal(t, "C", c.Name)
 	assert.Len(t, c.ObjectGroups, 1)
 	assert.Len(t, c.Groups, 0)
+
+	cL := c.Layers[0]
+	assert.Equal(t, uint32(9), cL.ID)
+	assert.Equal(t, cL.Name, "Tile Layer 3")
+	assert.Len(t, cL.Tiles, 400)
+
+	d := b.Groups[1]
+	assert.Equal(t, uint32(10), d.ID)
+	assert.Equal(t, "D", d.Name)
+	assert.Len(t, d.Layers, 2)
+	assert.Len(t, d.Groups, 0)
+
+	dL0 := d.Layers[0]
+	assert.Equal(t, uint32(12), dL0.ID)
+	assert.Equal(t, dL0.Name, "Tile Layer 5")
+	assert.Len(t, dL0.Tiles, 400)
+
+	dL1 := d.Layers[1]
+	assert.Equal(t, uint32(11), dL1.ID)
+	assert.Equal(t, dL1.Name, "Tile Layer 4")
+	assert.Len(t, dL1.Tiles, 400)
 }
 
 func TestFont(t *testing.T) {
